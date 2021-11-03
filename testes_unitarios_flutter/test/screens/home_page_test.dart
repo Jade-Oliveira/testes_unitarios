@@ -17,5 +17,13 @@ void main() {
 
     final appBar = find.byType(AppBar);
     expect(appBar, findsOneWidget);
+
+    //o find retorna um Finder não um widget, então não tenho como acessar as propriedades do elemento através dele
+    //nesse caso preciso fazer um cast através do tester para acessar as propriedades da AppBar
+    final appBarWidget = tester.widget<AppBar>(appBar);
+    expect(appBarWidget.actions!.length, 2);
+
+    final listViewCopy = find.byKey(const Key('list-view-copy'));
+    expect(listViewCopy, findsOneWidget);
   });
 }

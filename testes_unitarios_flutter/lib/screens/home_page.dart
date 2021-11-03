@@ -19,6 +19,22 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
+      body: Column(
+        children: [
+          ListView(
+            key: const Key('list-view-copy'),
+            //a propriedade abaixo faz a listView ocupar apenas o espaço que ela realmente precisa na tela
+            shrinkWrap: true,
+            children: [
+              CheckboxListTile(
+                value: true,
+                onChanged: (_) {},
+                title: const Text('Survey user'),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
