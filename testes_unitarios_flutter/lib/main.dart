@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testes_unitarios_flutter/controller/home_controller.dart';
 
 import 'screens/home_page.dart';
 
@@ -17,7 +18,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: HomePage(
+        controller: HomeController(),
+      ),
     );
   }
 }

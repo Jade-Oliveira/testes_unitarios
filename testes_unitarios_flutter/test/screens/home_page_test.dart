@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:testes_unitarios_flutter/controller/home_controller.dart';
 import 'package:testes_unitarios_flutter/screens/home_page.dart';
 
+class HomeControllerMock extends Mock implements IHomeController {}
+
 void main() {
+  IHomeController controller;
+  //método que vai ser executado para cada teste
+  setUp(() async {
+    //instancia de fato a controller acima
+    controller = HomeControllerMock();
+  });
   testWidgets('Validate basic widgets', (tester) async {
     //infla o widget a ser testado
-    await tester.pumpWidget(const MaterialApp(
-      home: HomePage(),
+    await tester.pumpWidget(MaterialApp(
+      home: HomePage(
+        controller: HomeControllerMock(),
+      ),
     ));
 
     //o title é a busca por esse texto na HomePage
@@ -25,5 +37,19 @@ void main() {
 
     final listViewCopy = find.byKey(const Key('list-view-copy'));
     expect(listViewCopy, findsOneWidget);
+
+    final bottomNabigationBar = find.byType(BottomNavigationBar);
+    expect(bottomNabigationBar, findsOneWidget);
+  });
+
+  testWidgets('Validate basic widgets', (tester) async {
+    //infla o widget a ser testado
+    await tester.pumpWidget(MaterialApp(
+      home: HomePage(
+        controller: HomeControllerMock(),
+      ),
+    ));
+
+    //preciso ter certeza que a propriedade que guarda esse índice quando iniciar a tela seja 0
   });
 }
